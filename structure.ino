@@ -1,3 +1,11 @@
+/**
+ * Example for connecting a Particle Photon to the
+ * Structure IoT Platform using MQTT.
+ *
+ * Copyright (c) 2016 Structure. All rights reserved.
+ * https://www.getstructure.io
+ */
+ 
 #include "SparkJson/SparkJson.h"
 #include "MQTT/MQTT.h"
 
