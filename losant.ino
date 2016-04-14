@@ -1,26 +1,26 @@
 /**
  * Example for connecting a Particle Photon to the
- * Structure IoT Platform using MQTT.
+ * Losant IoT Platform using MQTT.
  *
- * Copyright (c) 2016 Structure. All rights reserved.
- * https://www.getstructure.io
+ * Copyright (c) 2016 Losant. All rights reserved.
+ * https://www.losant.com
  */
  
 #include "SparkJson/SparkJson.h"
 #include "MQTT/MQTT.h"
 
-#define STRUCTURE_BROKER "broker.getstructure.io"
-#define STRUCTURE_DEVICE_ID "my-device-id"
-#define STRUCTURE_ACCESS_KEY "my-access-key"
-#define STRUCTURE_ACCESS_SECRET "my-access-secret"
+#define LOSANT_BROKER "broker.losant.com"
+#define LOSANT_DEVICE_ID "my-device-id"
+#define LOSANT_ACCESS_KEY "my-access-key"
+#define LOSANT_ACCESS_SECRET "my-access-secret"
 
-// Topic used to subscribe to Structure commands.
+// Topic used to subscribe to Losant commands.
 String MQTT_TOPIC_COMMAND =
-    String::format("structure/%s/command", STRUCTURE_DEVICE_ID);
+    String::format("losant/%s/command", LOSANT_DEVICE_ID);
 
-// Topic used to publish state to Structure.
+// Topic used to publish state to Losant.
 String MQTT_TOPIC_STATE =
-    String::format("structure/%s/state", STRUCTURE_DEVICE_ID);
+    String::format("losant/%s/state", LOSANT_DEVICE_ID);
 
 // The Photon's onboard LED.
 int LED = D7;
@@ -29,7 +29,7 @@ int LED = D7;
 void callback(char* topic, byte* payload, unsigned int length);
 
 // MQTT client.
-MQTT client(STRUCTURE_BROKER, 1883, callback);
+MQTT client(LOSANT_BROKER, 1883, callback);
 
 // Toggles the LED on/off whenever "toggle" command is received.
 bool ledValue = false;
@@ -58,16 +58,16 @@ void setup() {
     pinMode(LED, OUTPUT);
 }
 
-// Connects to the Structure MQTT broker.
+// Connects to the Losant MQTT broker.
 void connect() {
     
-    Serial.print("Connecting to Structure...");
+    Serial.print("Connecting to Losant...");
     
     while(!client.isConnected()) {
         client.connect(
-            STRUCTURE_DEVICE_ID,
-            STRUCTURE_ACCESS_KEY,
-            STRUCTURE_ACCESS_SECRET);
+            LOSANT_DEVICE_ID,
+            LOSANT_ACCESS_KEY,
+            LOSANT_ACCESS_SECRET);
             
         if(client.isConnected()) {
             Serial.println("connected!");
